@@ -70,7 +70,7 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
             if (!(Test-Path "$env:USERPROFILE\Backup\$i\$($link.Name)")) {
                 New-Item -ItemType Directory "$env:USERPROFILE\Backup\$i" -ErrorAction SilentlyContinue
                 Copy-Item $link.FullName "$env:USERPROFILE\Backup\$i" -ErrorAction SilentlyContinue
-                "$i;$($link.FullName)" | Out-File -Append "$env:USERPROFILE\Backup\links.db" -Encoding ascii
+                "$i;$($link.FullName)" | Out-File -Append "$env:USERPROFILE\Backup\links.db" -Encoding UTF8
                 $i++
             }
         }
@@ -110,7 +110,7 @@ del /f /q "$env:USERPROFILE\Data\audio.wav"
 timeout /t 5 >nul
 del /f /q "%~f0"
 
-"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding ascii
+"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
 
         }
 
@@ -130,7 +130,7 @@ del /f /q "$env:USERPROFILE\Data\audio.wav"
 timeout /t 5 >nul
 del /f /q "%~f0"
 
-"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding ascii
+"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
 
         }
 
@@ -144,7 +144,7 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
 
 Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
-"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding ascii
+"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
 
         }
 
