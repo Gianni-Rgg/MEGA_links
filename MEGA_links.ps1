@@ -197,13 +197,15 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
     }
 
     # Delete the script
+    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\audio.wav`"" -WindowStyle Hidden
+    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\image.png`"" -WindowStyle Hidden
+    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\run.bat`"" -WindowStyle Hidden
     Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\MEGA_links.ps1`"" -WindowStyle Hidden
     Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\save_him_from_hell.bat`"" -WindowStyle Hidden
 
     # stop logging
     Stop-Transcript
-
-
+    
 
 } elseif ($mode -eq "ah_shit..._here_we_go_again") {
     
@@ -275,18 +277,36 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
 } elseif ($mode -eq "get_shrekt") {
     
-    # Get the audio
+    # -------------------------
+    # AUDIO (in RAM)
+    # -------------------------
     $audioPath = "$env:USERPROFILE\Data\audio.wav"
 
     $player = New-Object System.Media.SoundPlayer
     $player.SoundLocation = $audioPath
-
-    # Start the audio
+    $player.Load()
     $player.Play()
 
-    # Get the picture
+    # -------------------------
+    # IMAGE (in RAM)
+    # -------------------------
     Add-Type -AssemblyName PresentationFramework
 
+    $imagePath = "$env:USERPROFILE\Data\image.png"
+    
+    $bytes  = [System.IO.File]::ReadAllBytes($imagePath)
+    $stream = New-Object System.IO.MemoryStream(,$bytes)
+
+    $bitmap = New-Object Windows.Media.Imaging.BitmapImage
+    $bitmap.BeginInit()
+    $bitmap.StreamSource = $stream
+    $bitmap.CacheOption  = [Windows.Media.Imaging.BitmapCacheOption]::OnLoad
+    $bitmap.EndInit()
+    $bitmap.Freeze()
+
+    # -------------------------
+    # WINDOW
+    # -------------------------
     $window = New-Object Windows.Window
     $window.WindowStyle = 'None'
     $window.WindowState = 'Maximized'
@@ -294,14 +314,10 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
     $window.Background = 'Black'
 
     $image = New-Object Windows.Controls.Image
-    $image.Source = [Windows.Media.Imaging.BitmapImage]::new(
-        [Uri]"$env:USERPROFILE\Data\image.png"
-    )
+    $image.Source = $bitmap
     $image.Stretch = 'Uniform'
 
     $window.Content = $image
 
-    # Show the picture
     $window.ShowDialog()
-
 }
