@@ -1,15 +1,5 @@
 # 🪄 MEGA_links
 
-A fast, stupidly simple PowerShell prank project.  
-Download → run a `.bat` → chaos (or not).
-
-No installers.  
-No dependencies.  
-No patience required.  
-No regrets (maybe).
-
----
-
 ## 🚀 What is MEGA_links?
 
 **MEGA_links** is a tiny PowerShell prank system driven entirely by **batch files**.
