@@ -48,6 +48,20 @@ Just vibes.
 
 ## 🎭 Available modes
 
+### 🤝 with_empathy
+- Opens the PNG image
+- Nothing else
+- No blocking
+- No sound
+- No persistence
+- No stress
+
+You’re still a good person. (probably)
+
+> The “I’m not a monster” mode.
+
+---
+
 ### 😈 without_empathy
 - Opens a **PNG image in fullscreen with a sound**
 - Makes escaping slightly annoying (fullscreen, Alt+Tab blocked)
@@ -57,26 +71,20 @@ Just vibes.
   - nothing remains
   - no evidence, no witnesses
 
+Emotional damage: enabled
+
 > Short. Brutal. Memorable.
-
----
-
-### 🤝 with_empathy
-- Opens the PNG image
-- Nothing else
-- No blocking
-- No persistence
-- No stress
-
-> The “I’m not a monster” mode.
 
 ---
 
 ### 🤪 wtf_is_wrong_with_you
 - Installs the script in **persistent mode**
 - Creates a **hidden scheduled task to launch the without_empathy mode at least once a week**
+- Also plays a sound
 - The prank can come back later  
   *(randomly, because why not)*
+  
+Psychological warfare mode.
 
 > Special mode for people with questionable life choices.
 
@@ -92,29 +100,6 @@ Just vibes.
 
 That’s it.  
 Seriously.
-
----
-
-## 🔊 Sound effects (yes, on purpose)
-
-Some modes include **audio playback** because silence is suspicious:
-
-- **without_empathy**
-  - Plays a sound
-  - Displays the fullscreen image
-  - Emotional damage: enabled
-
-- **wtf_is_wrong_with_you**
-  - Also plays a sound
-  - Possibly later, randomly
-  - Psychological warfare mode
-
-- **with_empathy**
-  - No audio
-  - You’re still a good person (probably)
-
-The sound is intentional.  
-The timing is not your friend’s.
 
 ---
 
