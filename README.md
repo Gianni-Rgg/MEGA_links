@@ -25,6 +25,21 @@ Psychological damage may last longer.
 
 ---
 
+## 🖥️ What does it prank exactly? (important, really)
+
+**MEGA_links only pranks the shortcuts (links) on the Desktop.**  
+Nothing else. No files are touched. No data is harmed.
+
+- All `.lnk` shortcuts on the Desktop are temporarily replaced
+- After the prank, **everything is restored exactly as it was**
+- Same shortcut names
+- Same targets
+- Same locations
+
+It’s basically *harmless chaos with a rollback button*.
+
+---
+
 ## ⚙️ How it works (simple version)
 
 - The **`.bat` files** are the entry point  
@@ -87,21 +102,6 @@ Just vibes.
 
 That’s it.  
 Seriously.
-
----
-
-## 🖥️ What does it prank exactly? (important, really)
-
-**MEGA_links only pranks the shortcuts (links) on the Desktop.**  
-Nothing else. No files are touched. No data is harmed.
-
-- All `.lnk` shortcuts on the Desktop are temporarily replaced
-- After the prank, **everything is restored exactly as it was**
-- Same shortcut names
-- Same targets
-- Same locations
-
-It’s basically *harmless chaos with a rollback button*.
 
 ---
 
