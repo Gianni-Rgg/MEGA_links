@@ -174,7 +174,8 @@ A: No. It’s worse. It’s intentional.
 **Q: Can I remove it?**  
 A: Yes. Just open cmd and run:
 ``` cmd
-"C:\Users\%USERNAME%\Data\save_him_from_hell.bat"
+cd "C:\Users\%USERNAME%\Data\"
+.\save_him_from_hell.bat
 ```
 **Q: Will my friend forgive me?**  
 A: That depends on the mode you chose.
