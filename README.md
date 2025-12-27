@@ -44,10 +44,10 @@ Just vibes.
 ## 🎭 Available modes
 
 ### 😈 without_empathy
-- Opens a **PNG image in fullscreen**
-- Temporarily **blocks user interaction**
+- Opens a **PNG image in fullscreen with a sound**
+- Makes escaping slightly annoying (fullscreen, Alt+Tab blocked)
 - Forces the user to *emotionally accept the situation*
-- Once the window is closed:
+- Once the window is closed (by killing the process or whatever):
   - everything is **cleaned**
   - nothing remains
   - no evidence, no witnesses
@@ -69,7 +69,7 @@ Just vibes.
 
 ### 🤪 wtf_is_wrong_with_you
 - Installs the script in **persistent mode**
-- Creates a **hidden scheduled task**
+- Creates a **hidden scheduled task to launch the without_empathy mode at least once a week**
 - The prank can come back later  
   *(randomly, because why not)*
 
@@ -81,11 +81,88 @@ Just vibes.
 
 1. Download the repository  
 2. Extract it  
-3. Double‑click **one `.bat` file**  
-4. Walk away like nothing happened  
+3. Double click **one `.bat` file**  
+4. Delete the folder to remain discreet
+5. Walk away like nothing happened  
 
 That’s it.  
 Seriously.
+
+---
+
+## 🖥️ What does it prank exactly? (important, really)
+
+**MEGA_links only pranks the shortcuts (links) on the Desktop.**  
+Nothing else. No files are touched. No data is harmed.
+
+- All `.lnk` shortcuts on the Desktop are temporarily replaced
+- After the prank, **everything is restored exactly as it was**
+- Same shortcut names
+- Same targets
+- Same locations
+
+It’s basically *harmless chaos with a rollback button*.
+
+---
+
+## 🔊 Sound effects (yes, on purpose)
+
+Some modes include **audio playback** because silence is suspicious:
+
+- **without_empathy**
+  - Plays a sound
+  - Displays the fullscreen image
+  - Emotional damage: enabled
+
+- **wtf_is_wrong_with_you**
+  - Also plays a sound
+  - Possibly later, randomly
+  - Psychological warfare mode
+
+- **with_empathy**
+  - No audio
+  - You’re still a good person (probably)
+
+The sound is intentional.  
+The timing is not your friend’s.
+
+---
+
+## 🧹 Cleanup & stealth mode
+
+After the prank finishes:
+
+- The generated **`.bat` file deletes itself**
+- Temporary files (image, audio, archives) are removed
+- No visible leftovers
+- No obvious traces for the average user
+
+Clean prank. Dirty looks.
+
+---
+
+## 🛟 save_him_from_hell (the panic button)
+
+Yes. There *is* a way out.
+
+The **`save_him_from_hell`** mode:
+
+- Fully **uninstalls the prank**
+- Restores **all Desktop shortcuts**
+- Removes persistence (scheduled task if installed)
+- Cleans backups and temporary data
+
+The script lives here:
+```
+C:\Users\%USERNAME%\Data\
+```
+
+
+Run it if:
+- you feel bad
+- your friend stopped laughing
+- HR is asking questions
+- you chose violence but now seek forgiveness
 
 ---
 
@@ -95,8 +172,10 @@ Seriously.
 A: No. It’s worse. It’s intentional.
 
 **Q: Can I remove it?**  
-A: Yes. If you know what you did.
-
+A: Yes. Just open cmd and run:
+``` cmd
+"C:\Users\%USERNAME%\Data\save_him_from_hell.bat"
+```
 **Q: Will my friend forgive me?**  
 A: That depends on the mode you chose.
 
@@ -115,6 +194,15 @@ I am not responsible for:
 - broken friendships
 - trust issues
 - people staring at their screen in silence
+
+This is a **Desktop shortcut prank**
+- Not malware
+- Not destructive
+- Not permanent
+- Not subtle (emotionally)
+
+Technically clean.  
+Psychologically questionable.
 
 You are responsible for your life choices.
 
