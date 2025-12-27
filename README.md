@@ -8,7 +8,7 @@ You don’t need to understand PowerShell.
 You don’t need admin rights.  
 You don’t need a plan.
 
-👉 Just download the project and **double‑click a `.bat` file**.
+👉 Just download the project and **double-click a `.bat` file**.
 
 Execution takes **seconds**.  
 Psychological damage may last longer.
@@ -36,6 +36,7 @@ It’s basically *harmless chaos with a rollback button*.
 - Each `.bat` launches `MEGA_links.ps1` with a specific **mode**
 - The PowerShell script does the dirty work:
   - displays an image
+  - play audio
   - blocks (or politely doesn’t block) the user
   - cleans everything after itself
   - installs persistence (only if you really asked for it)
@@ -77,9 +78,9 @@ Emotional damage: enabled
 
 ---
 
-### 🤪 wtf_is_wrong_with_you
+### 👹 wtf_is_wrong_with_you
 - Installs the script in **persistent mode**
-- Creates a **hidden scheduled task to launch the without_empathy mode at least once a week**
+- Creates a **hidden scheduled task to launch the "without_empathy" mode at least once a week**
 - Also plays a sound
 - The prank can come back later  
   *(randomly, because why not)*
@@ -103,19 +104,6 @@ Seriously.
 
 ---
 
-## 🧹 Cleanup & stealth mode
-
-After the prank finishes:
-
-- The generated **`.bat` file deletes itself**
-- Temporary files (image, audio, archives) are removed
-- No visible leftovers
-- No obvious traces for the average user
-
-Clean prank. Dirty looks.
-
----
-
 ## 🛟 save_him_from_hell (the panic button)
 
 Yes. There *is* a way out.
@@ -127,13 +115,12 @@ The **`save_him_from_hell`** mode:
 - Removes persistence (scheduled task if installed)
 - Cleans backups and temporary data
 
-The script lives here:
-```
-C:\Users\%USERNAME%\Data\
+Just open cmd and run:
+``` cmd
+cd /d "%USERPROFILE%\Data\" && save_him_from_hell.bat"
 ```
 
-
-Run it if:
+Do it if:
 - you feel bad
 - your friend stopped laughing
 - HR is asking questions
@@ -146,12 +133,9 @@ Run it if:
 **Q: Is this malware?**  
 A: No. It’s worse. It’s intentional.
 
-**Q: Can I remove it?**  
-A: Yes. Just open cmd and run:
-``` cmd
-cd "C:\Users\%USERNAME%\Data\"
-.\save_him_from_hell.bat
-```
+**Q: How does the non-linear backreaction of quantum vacuum fluctuations, coupled with baryonic feedback and magneto-turbulent plasma dynamics, self-consistently regulate the emergence of large-scale spacetime anisotropies during the pre-recombination epoch, and can this mechanism resolve the apparent tension between ΛCDM predictions and the observed scale-dependent deviations in cosmic shear and CMB lensing without invoking new fundamental fields or modifications of General Relativity?**
+A: Yes.
+
 **Q: Will my friend forgive me?**  
 A: That depends on the mode you chose.
 
