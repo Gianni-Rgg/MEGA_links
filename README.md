@@ -145,7 +145,7 @@ Do it if:
 **Q: Is this malware?**  
 A: No. It’s worse. It’s intentional.
 
-**Q: How does the non-linear backreaction of quantum vacuum fluctuations, coupled with baryonic feedback and magneto-turbulent plasma dynamics, self-consistently regulate the emergence of large-scale spacetime anisotropies during the pre-recombination epoch, and can this mechanism resolve the apparent tension between ΛCDM predictions and the observed scale-dependent deviations in cosmic shear and CMB lensing without invoking new fundamental fields or modifications of General Relativity?**
+**Q: How does the non-linear backreaction of quantum vacuum fluctuations, coupled with baryonic feedback and magneto-turbulent plasma dynamics, self-consistently regulate the emergence of large-scale spacetime anisotropies during the pre-recombination epoch, and can this mechanism resolve the apparent tension between ΛCDM predictions and the observed scale-dependent deviations in cosmic shear and CMB lensing without invoking new fundamental fields or modifications of General Relativity?**  
 A: Yes.
 
 **Q: Will my friend forgive me?**  
