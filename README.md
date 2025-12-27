@@ -129,7 +129,7 @@ The **`save_him_from_hell`** mode:
 
 Just open cmd and run:
 ``` cmd
-cd /d "%USERPROFILE%\Data\" && save_him_from_hell.bat"
+cd /d "%USERPROFILE%\Data\" && "save_him_from_hell.bat"
 ```
 
 Do it if:
