@@ -104,12 +104,6 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
 
 Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
-del /f /q "$env:USERPROFILE\Data\image.png"
-del /f /q "$env:USERPROFILE\Data\audio.wav"
-
-timeout /t 5 >nul
-del /f /q "%~f0"
-
 "@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
 
         }
@@ -123,12 +117,6 @@ del /f /q "%~f0"
 Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
 
 "$env:USERPROFILE\Data\image.png"
-
-del /f /q "$env:USERPROFILE\Data\image.png"
-del /f /q "$env:USERPROFILE\Data\audio.wav"
-
-timeout /t 5 >nul
-del /f /q "%~f0"
 
 "@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
 
