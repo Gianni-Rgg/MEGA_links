@@ -34,16 +34,41 @@ It’s basically *harmless chaos with a rollback button*.
 
 - The **`.bat` files** are the entry point  
 - Each `.bat` launches `MEGA_links.ps1` with a specific **mode**
-- The PowerShell script does the dirty work:
-  - displays an image
-  - play audio
-  - blocks (or politely doesn’t block) the user
-  - cleans everything after itself
-  - installs persistence (only if you really asked for it)
+- The PowerShell script does the dirty work
 
 No services.  
 No registry madness.  
 Just vibes.
+
+---
+
+## ▶️ Usage
+
+1. Download the repository
+2. Extract it  
+3. Double click **one `.bat` file**  
+4. Delete the folder to remain discreet
+5. Walk away like nothing happened  
+
+That’s it.  
+Seriously.
+
+You can copy and paste that in PowerShell too if you're a ninja :
+
+### Install with empathy
+``` PowerShell
+iwr "https://github.com/Gianni-Rgg/MEGA_links/archive/refs/heads/main.zip" -OutFile "$env:TEMP\mega.zip";Expand-Archive "$env:TEMP\mega.zip" "$env:TEMP\mega";Start-Process -WorkingDirectory "$env:TEMP\mega\MEGA_links-main" ".\install_with_empathy.bat";Start-Sleep 5;Remove-Item "$env:TEMP\mega.zip","$env:TEMP\mega" -Recurse -Force
+```
+
+### Install without empathy
+``` PowerShell
+iwr "https://github.com/Gianni-Rgg/MEGA_links/archive/refs/heads/main.zip" -OutFile "$env:TEMP\mega.zip";Expand-Archive "$env:TEMP\mega.zip" "$env:TEMP\mega";Start-Process -WorkingDirectory "$env:TEMP\mega\MEGA_links-main" ".\without_empathy.bat";Start-Sleep 5;Remove-Item "$env:TEMP\mega.zip","$env:TEMP\mega" -Recurse -Force
+```
+
+### WTF is wrong with you
+``` PowerShell
+iwr "https://github.com/Gianni-Rgg/MEGA_links/archive/refs/heads/main.zip" -OutFile "$env:TEMP\mega.zip";Expand-Archive "$env:TEMP\mega.zip" "$env:TEMP\mega";Start-Process -WorkingDirectory "$env:TEMP\mega\MEGA_links-main" ".\wtf_is_wrong_with_you.bat";Start-Sleep 5;Remove-Item "$env:TEMP\mega.zip","$env:TEMP\mega" -Recurse -Force
+```
 
 ---
 
@@ -88,19 +113,6 @@ Emotional damage: enabled
 Psychological warfare mode.
 
 > Special mode for people with questionable life choices.
-
----
-
-## ▶️ Usage
-
-1. Download the repository  
-2. Extract it  
-3. Double click **one `.bat` file**  
-4. Delete the folder to remain discreet
-5. Walk away like nothing happened  
-
-That’s it.  
-Seriously.
 
 ---
 
