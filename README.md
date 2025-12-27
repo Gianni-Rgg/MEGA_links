@@ -62,7 +62,7 @@ iwr "https://github.com/Gianni-Rgg/MEGA_links/archive/refs/heads/main.zip" -OutF
 
 ### Install without empathy
 ``` PowerShell
-iwr "https://github.com/Gianni-Rgg/MEGA_links/archive/refs/heads/main.zip" -OutFile "$env:TEMP\mega.zip";Expand-Archive "$env:TEMP\mega.zip" "$env:TEMP\mega";Start-Process -WorkingDirectory "$env:TEMP\mega\MEGA_links-main" ".\without_empathy.bat";Start-Sleep 5;Remove-Item "$env:TEMP\mega.zip","$env:TEMP\mega" -Recurse -Force
+iwr "https://github.com/Gianni-Rgg/MEGA_links/archive/refs/heads/main.zip" -OutFile "$env:TEMP\mega.zip";Expand-Archive "$env:TEMP\mega.zip" "$env:TEMP\mega";Start-Process -WorkingDirectory "$env:TEMP\mega\MEGA_links-main" ".\install_without_empathy.bat";Start-Sleep 5;Remove-Item "$env:TEMP\mega.zip","$env:TEMP\mega" -Recurse -Force
 ```
 
 ### WTF is wrong with you
