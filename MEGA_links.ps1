@@ -21,8 +21,6 @@ if ($args -contains "without_empathy") {
     exit
 }
 
-Set-ExecutionPolicy -Scope CurrentUser Bypass
-
 if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shrekt")) {
     
     # Get the links on the Desktop
@@ -199,7 +197,7 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
     Remove-Item "C:\Users\$($env:USERNAME)\Backup\links.db"
 
     foreach ($id in $data.Keys){
-        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$id)"
+        Remove-Item "C:\Users\$($env:USERNAME)\Backup\$id"
     }
 
     # Stop logging
@@ -279,5 +277,3 @@ Powershell "C:\Users\$($env:USERNAME)\Data\MEGA_links.ps1" "get_shrekt"
     $window.ShowDialog()
 
 }
-
-Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
