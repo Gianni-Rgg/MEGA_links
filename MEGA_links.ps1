@@ -70,7 +70,7 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
             if (!(Test-Path "$env:LOCALAPPDATA\Backup\$i\$($link.Name)")) {
                 New-Item -ItemType Directory "$env:LOCALAPPDATA\Backup\$i" -ErrorAction SilentlyContinue
                 Copy-Item $link.FullName "$env:LOCALAPPDATA\Backup\$i" -ErrorAction SilentlyContinue
-                "$i;$($link.FullName)" | Out-File -Append "$env:LOCALAPPDATA\Backup\links.db" -Encoding UTF8
+                "$i;$($link.FullName)" | Out-File -Append "$env:LOCALAPPDATA\Backup\links.db" -Encoding Default
                 $i++
             }
         }
@@ -104,7 +104,7 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 
 Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 
-"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding UTF8
+"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding ASCII
 
         }
 
@@ -118,7 +118,7 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 
 "$env:LOCALAPPDATA\Data\image.png"
 
-"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding UTF8
+"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding ASCII
 
         }
 
@@ -132,7 +132,7 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
 
 Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 
-"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding UTF8
+"@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding ASCII
 
         }
 
